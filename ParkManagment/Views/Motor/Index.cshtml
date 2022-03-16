@@ -1,0 +1,57 @@
+
+@model IEnumerable<ParkManagment.DTOs.MotorDto>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                RegNumber
+            </th>
+              <th>
+                View
+            </th>
+            <th>
+                Update
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var motor in Model)
+        {
+            <tr>
+                <th>
+                    @motor.Id
+                </th>
+                <th>
+                    @motor.Name
+                </th>
+                <th>
+                    @motor.RegNumber
+                </th>
+                <th>
+                    <a asp-action="Get" asp-route-id="@motor.Id" class="btn btn-info">View</a>
+                </th>
+                <th>
+                    <a asp-action="Update" asp-route-id="@motor.Id" class="btn btn-success" >Update</a>
+                </th>
+                <th>
+                    <a asp-action="Delete" asp-route-id="@motor.Id" class="btn btn-danger">Delete</a>
+                </th>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+</div>
+<div>
+    <a  asp-action="Create" class="btn">Add new Vehicle</a>
+</div>

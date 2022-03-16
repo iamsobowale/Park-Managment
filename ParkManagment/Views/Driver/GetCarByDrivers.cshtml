@@ -1,0 +1,28 @@
+@model System.Collections.Generic.IList<ParkManagment.Entities.Motor>
+
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>RegNumber</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @item.Name
+                </th>
+                <th>
+                    @item.RegNumber
+                </th>
+                <th><a asp-controller="Payment" asp-action="Create" asp-route-id="@item.Id" class="btn btn-primary">Make Payment</a></th>
+            </tr>
+        }
+        </tbody>
+        <tr>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,42 @@
+@model IEnumerable<ParkManagment.DTOs.Admin.AdminDto>
+
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var driver in Model)
+        {
+            <tr>
+                <th>
+                    @driver.Id
+                </th>
+                <th>
+                    @driver.Email
+                </th>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <th><a asp-controller="Staff" asp-action="Create" class="btn btn-outline-danger" >Create New Staff</a></th>
+            <th> <a asp-controller="Park" asp-action="Create" class="btn btn-outline-success" >Make New Park</a></th>
+            <th><a asp-controller="Staff" asp-action="Index" class="btn btn-outline-dark" >View Staffs</a></th>
+            <th> <a asp-controller="Driver" asp-action="Index" class="btn btn-outline-light" >View Drivers</a></th>
+        </tr>
+        </tbody>
+    </table>
+</div>

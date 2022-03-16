@@ -1,0 +1,23 @@
+@model ParkManagment.DTOs.Payment.PaymentDto
+<div>
+    <table class="table">
+      <tr>
+        <th>Id</th>
+        <th>DayOfPayment</th>
+        <th>Days Paid For</th>
+        <th>Expire</th>
+        <th>TotalPayment</th>
+        <th>Vehicle Paid For</th>
+      </tr>
+      <tr>
+        <td>@Model.Id</td>
+        <td>@Model.DayOfPayment</td>
+        <td>@Model.NumberOfDays</td>
+        <td>@Model.Expire</td>
+        <td>@Model.TotalPayment</td>
+        <td>@Model.MotorRegNumber</td>
+      </tr>
+      <tr>
+      </tr>
+    </table>
+</div>

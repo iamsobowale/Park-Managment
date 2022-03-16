@@ -1,0 +1,26 @@
+@* @model ParkManagment.DTOs.DriverRequestModel *@
+<div>
+     <form asp-action="Update">
+         <div>
+            <label>FirstName</label>
+            <input type="text" name="FirstName" value="@Model" required/>
+         </div>
+         <div>
+            <label>LastName</label>
+            <input type="text" name="LastName" value="@Model.LastName" readonly required/>
+         </div>
+         <div>
+             <label>PhoneNumber</label>
+             <input type="text" name="PhoneNumber" value="@Model.PhoneNumber" required/>
+         </div>
+        <div>
+           <label>Password</label>
+           <input type="password" name="PhoneNumber" value="@Model" required> 
+        </div>
+       <div>
+         
+          <input type="submit" value="Update" class="btn btn-primary" required/>
+       </div>
+    
+        </form>
+</div>

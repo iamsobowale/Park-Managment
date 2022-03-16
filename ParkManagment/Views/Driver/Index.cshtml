@@ -1,0 +1,59 @@
+@model IEnumerable<ParkManagment.DTOs.DriverDto>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Detail
+            </th>
+            <th>
+                Update
+            </th>
+            <th>
+                Delete
+            </th>
+            <th>
+                CarOwned
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var driver in Model)
+        {
+            <tr>
+                <th>
+                    @driver.Id
+                </th>
+                <th>
+                    @driver.FirstName
+                </th>
+                <th>
+                    <a asp-action="Get" asp-route-id="@driver.Id" class="btn btn-primary">View</a>
+                </th>
+                <th>
+                    <a asp-action="Update" asp-route-id="@driver.Id" class="btn btn-success">Edit</a>
+                </th>
+                <th>
+                    <a asp-action="Delete" asp-route-id="@driver.Id" class="btn btn-danger" >Delete</a>
+                </th>
+                <th>
+                     <a asp-action="GetCarByDrivers" asp-route-id="@driver.Id">Cars</a>
+                </th>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+</div>
+<div>
+    <a asp-controller="Motor" asp-action="Create" class="btn btn-success" >Create Car</a>
+</div>
+<div>
+    <a asp-controller="Payment" asp-action="Create" class="btn btn-success" >Make Payment</a>
+</div>

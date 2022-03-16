@@ -1,0 +1,48 @@
+@model IEnumerable<ParkManagment.DTOs.Park.ParkDto>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Detail
+            </th>
+              <th>
+                Update
+            </th>
+            <th>
+                DeletePark
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var park in Model)
+        {
+            <tr>
+                <th>
+                    @park.Id
+                </th>
+                <th>
+                    @park.Name
+                </th>
+                <th>
+                    <a asp-action="Get" asp-route-id="@park.Id">View</a>
+                </th>
+                <th>
+                    <a asp-action="Update" asp-route-id="@park.Id" class="btn btn-info">Edit</a>
+                </th> 
+                <th><a asp-action="Delete" asp-route-id="@park.Id" class="btn btn-danger">DeletePark</a></th>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+</div>
+<div>
+    <a  asp-action="Create">Add new Park</a>
+</div>

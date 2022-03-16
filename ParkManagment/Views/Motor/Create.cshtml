@@ -1,0 +1,25 @@
+@model ParkManagment.DTOs.MotorRequestModel
+
+<div>
+    <form asp-action="Create">
+        <div>
+            <label>Name</label>
+            <input type="text" name="Name" required/>
+        </div>
+        <div>
+            <label>NumberOfSits</label>
+            <input type="text" name="NumberOfSit" required/>
+        </div>
+        <div>
+            <label> Drivers</label>
+            <select asp-for="DriverId" asp-items="ViewBag.Drivers"></select>
+        </div>
+         <div>
+            <label> Parks</label>
+            <select asp-for="ParkId" asp-items="ViewBag.Parks"></select>
+        </div>
+        <div>
+            <input type="submit" value="Create" class="btn btn-dark" required/>
+        </div>
+    </form>
+</div>

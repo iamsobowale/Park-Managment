@@ -1,0 +1,14 @@
+<form asp-action="Update">
+    <div>
+        <label>Name</label>
+        <input type="text" name="Name" value="@Model.Name" required/>
+    </div>
+    <div>
+        <label>RegNumber</label>
+        <input type="text" name="RegNumber" value="@Model.RegNumber" readonly required/>
+    </div>
+    <div>
+        <input type="submit" value="Update" class="btn btn-primary" required/>
+    </div>
+    
+</form>

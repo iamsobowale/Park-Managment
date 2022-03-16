@@ -1,0 +1,23 @@
+
+<div>
+    <form asp-action="Update">
+        <div>
+            <label>ParkName</label>
+            <input type="text" name="Name" value="@Model.Name" required/>
+        </div>
+        <div>
+            <label>ParkPrice</label>
+            <input type="text" name="Price" value="@Model.Price" readonly required/>
+        </div>
+        <div>
+            <label>Description</label>
+            <input type="text" name="Description" value="@Model.Description" required/>
+        </div>
+        <div>
+               
+            <input type="submit" value="Update" class="btn btn-primary" required/>
+        </div>
+    
+    </form>
+</div>
+

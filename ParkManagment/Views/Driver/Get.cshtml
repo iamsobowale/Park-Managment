@@ -1,0 +1,25 @@
+@model ParkManagment.DTOs.DriverDto
+<div>
+    <table class="table">
+      <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>PhoneNumber</th>
+        <th>DateOfBirth</th>
+        <th>ParkName</th>
+        <th> CarOwned</th>
+      </tr>
+      <tr>
+        <td>@Model.FirstName</td>
+        <td>@Model.LastName</td>
+        <td>@Model.PhoneNumber</td>
+        <td>@Model.Dob</td>
+        <td>@Model.ParkName</td>
+       <th> <a asp-action="GetCarByDrivers" asp-route-id="@Model.Id" class="btn btn-primary">Cars</a></th>
+                          
+                       
+      </tr>
+      <tr>
+      </tr>
+    </table>
+</div>

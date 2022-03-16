@@ -1,0 +1,19 @@
+@model ParkManagment.DTOs.Payment.PaymentRequesModel
+
+<div>
+    <form asp-action="Create">
+        <div>
+            <label>NumberOfDaysOfPayment</label>
+            <input type="number" name="NumberOfDays" required/>
+        </div>
+        @* <div> *@
+        @*     <label>Cars</label> *@
+        @*     <select asp-for="MotorId" asp-items="ViewBag.Motor"></select> *@
+        @* </div> *@
+         <div>
+             <input type="submit" value="Create" class="btn btn-dark" required/>
+        </div>
+    
+        </form>
+</div>
+

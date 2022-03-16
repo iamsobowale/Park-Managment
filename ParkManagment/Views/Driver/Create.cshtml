@@ -1,0 +1,33 @@
+
+@model ParkManagment.DTOs.DriverRequestModel
+
+<div>
+    <form asp-action="Create">
+        <div>
+            <label>FirstName</label>
+            <input type="text" name="FirstName" required/>
+        </div>
+        <div>
+            <label> LastName</label>
+            <input type="text" name="LastName" required/>
+        </div>
+        <label>PhoneNumber</label>
+        <input type="text" name="PhoneNumber" required/>
+        <div>
+            <label>Age</label>
+            <input type="date" name="Dob" required/>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" name="Password" required/>
+        </div>
+        <div>
+            <label>Parks</label>
+            <select asp-for="ParkId" asp-items="ViewBag.Parks"></select>
+        </div>
+         <div>
+             <input type="submit" value="Create" class="btn btn-dark" required/>
+        </div>
+    
+        </form>
+</div>

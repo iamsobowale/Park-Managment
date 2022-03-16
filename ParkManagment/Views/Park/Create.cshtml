@@ -1,0 +1,19 @@
+@model ParkManagment.DTOs.Park.ParkResquestModel
+<div>
+    <form asp-action="Create">
+        <div>
+            <label>ParkName</label>
+            <input type="text" name="Name" required/>
+        </div>
+        <div>
+            <label> Price</label>
+            <input type="number" name="Price" required/>
+        </div>
+        <label>Description</label>
+        <input type="text" name="Description" required/>
+        <div>
+            <input type="submit" value="Create" class="btn btn-dark" required/>
+        </div>
+    
+        </form>
+</div>

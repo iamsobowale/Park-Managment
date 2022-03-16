@@ -1,0 +1,39 @@
+@model IEnumerable<ParkManagment.DTOs.Payment.PaymentDto>
+
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Day Of Payment
+            </th>
+            <th>
+                Detail
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var payment in Model)
+        {
+            <tr>
+                <th>
+                    @payment.Id
+                </th>
+                <th>
+                    @payment.DayOfPayment
+                </th>
+                <th>
+                    <a asp-action="Get" asp-route-id="@payment.Id">View</a>
+                </th>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+</div>
+<div>
+    <a  asp-action="Create" class="btn btn-success">Make Payment</a>
+</div>

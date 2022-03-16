@@ -1,0 +1,15 @@
+@model ParkManagment.DTOs.DriverRequestModel
+<div>
+    <form asp-action="Login">
+        <label >First name:</label><br>
+        <input type="text" name="FirstName" required><br>
+        <label >Password:</label><br>
+        <input type="password" name="Password" required/>
+        <div>
+            <input type="submit" value="Login" class="btn btn-primary" required/>
+        </div>
+    </form>
+</div>
+<div>
+    <a asp-controller="Driver" asp-action="Create" class="btn btn-dark" >Create Account</a>
+</div>
