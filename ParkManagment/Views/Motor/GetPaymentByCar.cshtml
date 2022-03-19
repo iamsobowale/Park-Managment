@@ -1,0 +1,32 @@
+@model System.Collections.Generic.IList<ParkManagment.Entities.Payment>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Day Of Payment</th>
+            <th>Make Payment</th>
+            <th>View Payments</th>
+            <th>Update Car</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @item.Id
+                </th>
+                <th>
+                    @item.DayOfPayment
+                </th>
+                <th>
+                    <a asp-controller="Payment" asp-action="Get" asp-route-id="@item.Id" class="btn btn-outline-secondary">View Payment</a>
+                </th>
+            </tr>
+        }
+        </tbody>
+        <tr>
+        </tr>
+    </table>
+</div>

@@ -52,5 +52,11 @@ namespace ParkManagmentMVC.Implementions.DriverRepostory
             _context.SaveChanges();
             return motor;
         }
+
+        public IList<Payment> GetPaymentByMotor(int id)
+        {
+            var get = _context.Payments.Include(d => d.Motor).Where(c => c.MotorId == id).ToList();
+            return get;
+        }
     }
 }

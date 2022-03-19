@@ -59,8 +59,8 @@ namespace ParkManagment.Implemention.Repositries
 
         public IList<Motor> GetCarsByDriver(int id)
         {
-            var Driver = _context.Motors.Include(x => x.Driver).Where(x => x.Id == id).ToList();
-            return Driver;
+            var driver = _context.Motors.Include(x => x.Driver).Where(x => x.Driver.Id == id).ToList();
+            return driver;
         }
         
     }

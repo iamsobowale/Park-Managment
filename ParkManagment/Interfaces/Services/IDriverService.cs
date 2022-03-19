@@ -10,7 +10,7 @@ namespace ParkManagment.Interfaces
         bool Delete(int id);
         DriverResponseModel Get(int id);
         DriversResponseModel GetAll();
-        BaseResponse Update(Driver driver, int id);
+        DriverResponseModel Update(DriverRequestModel driver, int id);
         DriverResponseModel Login(DriverRequestModel _driverRequest);
         IList<Motor> GetCarsByDriver(int id);
     }

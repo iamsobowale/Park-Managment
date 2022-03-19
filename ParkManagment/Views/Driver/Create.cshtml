@@ -1,8 +1,10 @@
 
 @model ParkManagment.DTOs.DriverRequestModel
-
 <div>
     <form asp-action="Create">
+        <div style="color: dodgerblue; font-weight: bolder;">
+            <label style="text-align: center">@ViewBag.Account</label>
+        </div>
         <div>
             <label>FirstName</label>
             <input type="text" name="FirstName" required/>
@@ -25,9 +27,8 @@
             <label>Parks</label>
             <select asp-for="ParkId" asp-items="ViewBag.Parks"></select>
         </div>
-         <div>
-             <input type="submit" value="Create" class="btn btn-dark" required/>
+        <div>
+            <input type="submit" value="Create" class="btn btn-dark" required/>
         </div>
-    
-        </form>
+    </form>
 </div>

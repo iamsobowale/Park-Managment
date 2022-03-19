@@ -30,7 +30,6 @@ namespace ParkManagment.DTOs
     public class MotorRequestModel
     {
         public string Name { get; set; }
-        public int DriverId { get; set; }
         public int NumberOfSit { get; set; }
         public int ParkId { get; set; }
     }

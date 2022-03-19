@@ -2,18 +2,20 @@
 
 <div>
     <form asp-action="Create">
+        <div style="color: red; font-weight: bolder;">
+            <label style="text-align: center">@ViewBag.Messagess</label>
+        </div>
         <div>
             <label>NumberOfDaysOfPayment</label>
             <input type="number" name="NumberOfDays" required/>
         </div>
-        @* <div> *@
-        @*     <label>Cars</label> *@
-        @*     <select asp-for="MotorId" asp-items="ViewBag.Motor"></select> *@
-        @* </div> *@
-         <div>
-             <input type="submit" value="Create" class="btn btn-dark" required/>
+        <div>
+            <input type="submit" value="Create" class="btn btn-dark" required/>
         </div>
-    
-        </form>
+    </form>
+    <br/>
+    <form>
+     <input type="button" value="Go back!" onclick="history.back()">
+    </form>
 </div>
 

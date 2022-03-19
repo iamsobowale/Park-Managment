@@ -1,7 +1,15 @@
 using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ParkManagment.DTOs.Staff;
+using ParkManagment.Entities;
 using ParkManagment.Interfaces;
 
 namespace ParkManagmentMVC.Controllers
@@ -22,7 +30,7 @@ namespace ParkManagmentMVC.Controllers
             var getall = _staff.GetAll();
             return View(getall.Data);
         }
-
+        
         public IActionResult Create()
         {
             var dri = _parkService.GetAll();
@@ -35,12 +43,17 @@ namespace ParkManagmentMVC.Controllers
             var create = _staff.Create(_staffRequestModel);
             return RedirectToAction("Index");
         }
-        public IActionResult Get(int id)
+        public IActionResult Get()
         {
-            var staff = _staff.Get(id);
-            if(staff == null)
+            var id = HttpContext.Session.GetInt32("user");
+            if (id == null)
             {
-                return NotFound($"Staff with {id} does not exist");
+                return RedirectToAction("Login");
+            }
+            var staff = _staff.Get(id.Value);
+            if(!staff.Status)
+            {
+                return NotFound($"Staff with {id.Value} does not exist");
             }
             return View(staff.Data);
         }
@@ -57,7 +70,7 @@ namespace ParkManagmentMVC.Controllers
         [HttpPost]
         public IActionResult Update(StaffRequestModel staff, int id)
         {
-            
+           
            var update = _staff.Update(staff, id);
             return RedirectToAction("Index");
         }
@@ -88,12 +101,25 @@ namespace ParkManagmentMVC.Controllers
             var login =  _staff.Login(_staffRequestModel);
             if (login.Data==null)
             {
-                return RedirectToAction("Login");
+                ViewBag.StaffMesssage = "Invalid Email or Password";
+                return View();
             }
-
-            var id2 = login.Data.Id;
-            // return RedirectToAction("Get", new{id= id2});
-            return RedirectToAction("Index");
+                
+            HttpContext.Session.SetInt32("user", login.Data.Id);
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, login.Data.Id.ToString())
+            };
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authenticationProperties = new AuthenticationProperties();
+            var principal = new ClaimsPrincipal(claimsIdentity);
+            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authenticationProperties );
+            return RedirectToAction("Get");
+        }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
         }
 
     }

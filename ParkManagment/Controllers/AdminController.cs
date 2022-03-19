@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParkManagment.DTOs.Admin;
 using ParkManagment.Entities;
@@ -39,11 +40,10 @@ namespace ParkManagment.Controllers
             var login =  _adminService.Login(admin);
             if (login.Data ==null)
             {
-
                 ViewBag.Error = login.Message;
                 return View();
             }
-
+            HttpContext.Session.SetInt32("admin", login.Data.Id);
             return RedirectToAction("Index");
         }
     }

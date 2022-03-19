@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -47,7 +48,13 @@ namespace ParkManagment
             services.AddScoped<IStaffService, StaffService>();
             services.AddScoped<IAdminRepository, AdminRepo>();
             services.AddScoped<IAdminService, AdminService>();
-            
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(config =>
+            {
+                config.LoginPath = "/staff/login";
+                
+            });
+            services.AddAuthorization();
+            services.AddSession();
             services.AddControllersWithViews();
             string connectionString = "server=localhost;user=root;database=ParkManagment;port=3306;password=Pencil_1";
             services.AddDbContext<ApplicationContext>(option => option.UseMySQL(connectionString));
@@ -69,10 +76,11 @@ namespace ParkManagment
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

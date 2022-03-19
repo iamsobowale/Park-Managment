@@ -61,6 +61,8 @@ namespace ParkManagment.Implementions
 
             return new StaffResponseModel()
             {
+                Status = true,
+                Message = "Found",
                 Data = new StaffDto()
                 {
                     Dob = find.Dob,

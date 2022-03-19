@@ -6,6 +6,9 @@
         <tr>
             <th>Name</th>
             <th>RegNumber</th>
+            <th>Make Payment</th>
+            <th>View Payments</th>
+            <th>Update Car</th>
         </tr>
         </thead>
         <tbody>
@@ -18,7 +21,15 @@
                 <th>
                     @item.RegNumber
                 </th>
-                <th><a asp-controller="Payment" asp-action="Create" asp-route-id="@item.Id" class="btn btn-primary">Make Payment</a></th>
+                <th>
+                    <a asp-controller="Payment" asp-action="Create" asp-route-id="@item.Id" class="btn btn-primary">Make Payment</a>
+                </th>
+                <th>
+                    <a asp-controller="Motor" asp-action="GetPaymentByCar" asp-route-id="@item.Id" class="btn btn-outline-secondary">View Payments</a>
+                </th>
+                 <th>
+                    <a asp-controller="Motor" asp-action="Update" asp-route-id ="@item.Id" class="btn btn-outline-primary">Update</a>
+                </th>
             </tr>
         }
         </tbody>

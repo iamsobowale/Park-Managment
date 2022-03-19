@@ -9,8 +9,8 @@ using ParkManagment.Context;
 namespace ParkManagment.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220313161929_ParkManagmentsss")]
-    partial class ParkManagmentsss
+    [Migration("20220318183749_ParkManagment")]
+    partial class ParkManagment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

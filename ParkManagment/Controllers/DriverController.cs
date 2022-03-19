@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ParkManagment.DTOs;
@@ -9,6 +10,7 @@ namespace ParkManagmentMVC.Controllers
 {
     public class DriverController:  Controller
     {
+        
         private readonly IDriverService _driverService;
         private readonly IParkService _parkService;
 
@@ -33,44 +35,55 @@ namespace ParkManagmentMVC.Controllers
         [HttpPost]
         public IActionResult Create(DriverRequestModel _model)
         {
-            _driverService.Create(_model);
-            return RedirectToAction("Index");
+           var create = _driverService.Create(_model);
+           if (create.Status)
+           {
+               return RedirectToAction("Login");
+           }
+           ViewBag.Account ="Account Not Created";
+           return View();
         }
 
-        public IActionResult Get(int id)
+        public IActionResult Get(int get)
         {
-            var driver = _driverService.Get(id);
-            if(driver == null)
+            var id = HttpContext.Session.GetInt32("driver");
+            if (id == null)
             {
-                return NotFound($"User with {id} does not exist");
+                return RedirectToAction("Login");
             }
-            return View(driver.Data);
+            var staff = _driverService.Get(id.Value);
+            if(!staff.Status)
+            {
+                return NotFound($"Staff with {id.Value} does not exist");
+            }
+            return View(staff.Data);
         }
-
-        public IActionResult Update(int id)
+        public IActionResult Update()
         {
-            var update = _driverService.Get(id);
-            if (update==null)
+            var id = HttpContext.Session.GetInt32("driver");
+            var update = _driverService.Get(id.Value);
+            if (update.Data==null)
             {
                 throw new Exception($"User with Id{id} Does Not Exist");
             }
-            return View(update);
+            return View(update.Data);
         }
 
         [HttpPost]
-        public IActionResult Update(Driver driver, int id)
+        public IActionResult Update(DriverRequestModel driver)
         {
-            
-            _driverService.Update(driver, id);
-            return RedirectToAction("Index");
+            var id = HttpContext.Session.GetInt32("driver");
+            _driverService.Update(driver, id.Value);
+            return RedirectToAction("Get");
         }
 
         public IActionResult GetCarByDrivers(int id)
         {
+            id = HttpContext.Session.GetInt32("driver").Value;
             var driver = _driverService.GetCarsByDriver(id);
             if(driver == null)
             {
-                return NotFound($"Student with {id} does not exist");
+                return NotFound($"Driver with {id} does not exist");
             }
             return View(driver);
         }
@@ -101,11 +114,17 @@ namespace ParkManagmentMVC.Controllers
            var login =  _driverService.Login(_driverRequest);
             if (login.Data==null)
             {
-                return RedirectToAction("Login");
+                ViewBag.Messsage = "Invalid Email or Password";
+                return View();
             }
+            HttpContext.Session.SetInt32("driver", login.Data.Id);
+            return RedirectToAction("Get");
+        }
 
-            var id2 = login.Data.Id;
-            return RedirectToAction("Get", new{id= id2});
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
         }
 
     }

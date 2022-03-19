@@ -10,5 +10,6 @@ namespace ParkManagment.Interfaces
         Motor Get(int id);
         List<Motor> GetAll();
         Motor Update(Motor motor);
+        IList<Payment> GetPaymentByMotor (int id);
     }
 }

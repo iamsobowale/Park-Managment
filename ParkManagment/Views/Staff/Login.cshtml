@@ -1,7 +1,9 @@
 @model ParkManagment.DTOs.Staff.StaffRequestModel
-
 <div>
     <form asp-action="Login">
+        <div style="color: dodgerblue; font-weight: bolder;">
+            <label style="text-align: center">@ViewBag.StaffMesssage</label>
+        </div>
         <label >First name:</label><br>
         <input type="text" name="FirstName" required><br>
         <label >Password:</label><br>

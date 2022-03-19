@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ParkManagment.DTOs;
 using ParkManagment.Entities;
 using ParkManagment.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace ParkManagmentMVC.Controllers
 {
@@ -26,24 +27,25 @@ namespace ParkManagmentMVC.Controllers
             return View(get.Data);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            var dri = _driver.GetAll();
             var park = _parkService.GetAll();
             ViewData["Parks"] = new SelectList(park.Data, "Id", "Name");
-            ViewData["Drivers"] = new SelectList(dri.Data, "Id", "FirstName");
             return View();
         }
-
         [HttpPost]
         public IActionResult Create(MotorRequestModel _model)
         {
-            _motorService.Create(_model);
-            return RedirectToAction("Index");
+            var id = HttpContext.Session.GetInt32("driver");
+            var user = _driver.Get(id.Value);
+            _motorService.Create(_model, user.Data.Id);
+                ViewBag.CarCreated = "Car Successfully Created";
+            return View();
         }
 
         public IActionResult Get(int id)
         {
+           id = HttpContext.Session.GetInt32("driver").Value;
             var get = _motorService.Get(id);
             if (get==null)
             {
@@ -87,6 +89,16 @@ namespace ParkManagmentMVC.Controllers
         {
             _motorService.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult GetPaymentByCar(int id)
+        {
+            var get =  _motorService.GetPaymentByMotor(id);
+            if (get==null)
+            {
+                return View();
+            }
+            return View(get);
         }
     }
 }

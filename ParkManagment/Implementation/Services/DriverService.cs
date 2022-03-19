@@ -29,6 +29,8 @@ namespace ParkManagment.Implemention.DriverService
             _DriverRepository.Create(drivers);
             return new DriverResponseModel()
             {
+                Status = true,
+                Message = "Account Created Sucessfully",
                 Data = new DriverDto()
                 {
                     Dob = _model.Dob,
@@ -87,7 +89,6 @@ namespace ParkManagment.Implemention.DriverService
                Id = d.Id,
                FirstName = d.FirstName,
                LastName = d.LastName,
-
            }).ToList();
            return new DriversResponseModel
            {
@@ -97,7 +98,7 @@ namespace ParkManagment.Implemention.DriverService
            };
         }
 
-        public BaseResponse Update(Driver driver, int id)
+        public DriverResponseModel Update(DriverRequestModel driver, int id)
         {
             var find = _DriverRepository.Get(id);
             if (find==null)
@@ -109,8 +110,9 @@ namespace ParkManagment.Implemention.DriverService
             find.LastName = driver.LastName;
             find.PhoneNumber = driver.PhoneNumber;
             find.Dob = driver.Dob;
-            _DriverRepository.Update(driver);
-            return new BaseResponse
+            find.Password = driver.Password;
+            _DriverRepository.Update(find);
+            return new DriverResponseModel()
             {
                 Message =$"Driver Updated",
                 Status = true,

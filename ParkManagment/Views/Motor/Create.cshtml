@@ -1,7 +1,10 @@
-@model ParkManagment.DTOs.MotorRequestModel
+@model ParkManagment.DTOs.MotorDto
 
 <div>
     <form asp-action="Create">
+         <div style="color: red; font-weight: bolder;">
+            <label style="text-align: center">@ViewBag.CarCreated</label>
+         </div>
         <div>
             <label>Name</label>
             <input type="text" name="Name" required/>
@@ -11,15 +14,16 @@
             <input type="text" name="NumberOfSit" required/>
         </div>
         <div>
-            <label> Drivers</label>
-            <select asp-for="DriverId" asp-items="ViewBag.Drivers"></select>
-        </div>
-         <div>
             <label> Parks</label>
             <select asp-for="ParkId" asp-items="ViewBag.Parks"></select>
         </div>
+        <br>
         <div>
             <input type="submit" value="Create" class="btn btn-dark" required/>
         </div>
+        <br>
+        <form>
+            <input type="button" value="Go back" onclick="history.back()">
+        </form>
     </form>
 </div>

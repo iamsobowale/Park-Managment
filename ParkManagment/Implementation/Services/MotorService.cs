@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using ParkManagment.DTOs;
 using ParkManagment.Entities;
 using ParkManagment.Interfaces;
@@ -10,21 +11,22 @@ namespace ParkManagment.Implementions.Service
     public class MotorService:IMotorService
     {
         public readonly IMotorsRepository _Motors;
-        public MotorService(IMotorsRepository motors)
+        private IDriverRepository _driver;
+        public MotorService(IMotorsRepository motors, IDriverRepository driver)
         {
             _Motors = motors;
+            _driver = driver;
         }
 
-        public MotorResponseModel Create(DTOs.MotorRequestModel _model)
+        public MotorResponseModel Create(DTOs.MotorRequestModel _model, int userId)
         {
             Motor motors = new Motor()
             {
-                
                 Name = _model.Name,
                 RegNumber = $"Car/{Guid.NewGuid().ToString().Substring(0, 5)}",
-                DriverId = _model.DriverId,
+                DriverId = userId,
                 ParkId = _model.ParkId,
-                NumberOfSit = _model.NumberOfSit
+                NumberOfSit = _model.NumberOfSit,
             };
             _Motors.Create(motors);
             return new MotorResponseModel()
@@ -50,6 +52,7 @@ namespace ParkManagment.Implementions.Service
 
         public MotorDto Get(int id)
         {
+            
             var find = _Motors.Get(id);
             if (find==null)
             {
@@ -106,6 +109,11 @@ namespace ParkManagment.Implementions.Service
                     Name = update.Name
                 }
             };
+        }
+
+        public IList<Payment> GetPaymentByMotor(int id)
+        {
+            return _Motors.GetPaymentByMotor(id);
         }
     }
 }

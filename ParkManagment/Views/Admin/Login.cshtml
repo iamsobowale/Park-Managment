@@ -1,13 +1,9 @@
 @model ParkManagment.Entities.Admin
 <div>
     <form asp-action="Login">
-        
-            <div style="color: red; font-weight: bolder;">
-                <label style="text-align: center">@ViewBag.Error</label>
-            </div>
-
-        
-
+        <div style="color: red; font-weight: bolder;">
+            <label style="text-align: center">@ViewBag.Error</label>
+        </div>
         <label >Email:</label><br>
         <input type="email" name="Email" asp-for="Email" required><br>
         <label >Password:</label><br>
@@ -16,7 +12,4 @@
             <input type="submit" value="Login" class="btn btn-primary" required/>
         </div>
     </form>
-    @* <div> *@
-    @*     <a asp-controller="Admin" asp-action="Create" class="btn btn-success" >Create Account</a> *@
-    @* </div> *@
 </div>
