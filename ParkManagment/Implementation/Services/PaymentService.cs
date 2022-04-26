@@ -21,23 +21,21 @@ namespace ParkManagmentMVC.Implementions.DriverService
         }
         public PaymentResponseModel Create(PaymentRequesModel _model, int id)
         {
-            List<Payment> payments = new List<Payment>();
+            // List<Payment> payments = new List<Payment>();
             var motor =  _motors.Get(id);
-            var sum = motor.NumberOfSit * motor.Park.Price;
-            for (int i = 0; i < _model.NumberOfDays; i++)
+            var sum = motor.NumberOfSit * motor.Park.Price*_model.NumberOfDays;
+            var payment = new Payment()
             {
-                var payment = new Payment()
-                {
-                    NumberOfDays = _model.NumberOfDays,
-                    TotalPayment =sum,
-                    Expire = DateTime.Today.AddDays(i),
-                    DayOfPayment = DateTime.Now.Date,
-                    MotorId = _model.MotorId,
-                    Motor = motor
-                };
-                payments.Add(payment);
-            }
-            _payment.CreateMultiple(payments);  
+                NumberOfDays = _model.NumberOfDays,
+                TotalPayment =sum,
+                Expire = DateTime.Today.AddDays(_model.NumberOfDays),
+                DayOfPayment = DateTime.Now.Date,
+                MotorId = _model.MotorId,
+                Motor = motor
+            };
+            _payment.Create(payment);
+            // payments.Add(payment);
+            // _payment.CreateMultiple(payments);  
 
             return new PaymentResponseModel()
             {
@@ -89,6 +87,8 @@ namespace ParkManagmentMVC.Implementions.DriverService
             {
                 Expire = d.Expire,
                 Id = d.Id,
+                TotalPayment = d.TotalPayment,
+                MotorRegNumber = d.Motor.RegNumber,
                 DayOfPayment = d.DayOfPayment,
                 MotorName = d.Motor.Name,
                 NumberOfDays = d.NumberOfDays
@@ -101,14 +101,16 @@ namespace ParkManagmentMVC.Implementions.DriverService
             };
         }
 
-        public PaymentsResponseModel SearchByDate(DateTime day)
+        public PaymentsResponseModel SearchByDate(DateTime day, DateTime expire)
         {
-            var date = _payment.SearchByDate(day).Select(d => new PaymentDto()
+            var date = _payment.SearchByDate(day, expire).Select(d => new PaymentDto()
             {
+                Id = d.Id,
                 TotalPayment = d.TotalPayment,
                 MotorName = d.Motor.Name,
                 MotorRegNumber = d.Motor.RegNumber,
-                Expire = d.Expire
+                Expire = d.Expire,
+                DayOfPayment = d.DayOfPayment
             }).ToList();
             return new PaymentsResponseModel()
             {

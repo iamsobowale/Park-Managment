@@ -12,6 +12,6 @@ namespace ParkManagment.Interfaces
         PaymentResponseModel Create(PaymentRequesModel _model, int id);
         PaymentResponseModel Get(int id);
         PaymentsResponseModel GetAll();
-        PaymentsResponseModel SearchByDate(DateTime day);
+        PaymentsResponseModel SearchByDate(DateTime day, DateTime expire);
     }
 }

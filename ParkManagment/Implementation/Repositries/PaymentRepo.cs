@@ -44,9 +44,9 @@ namespace ParkManagment.Implementions.Service
             return check;
         }
 
-        public IList<Payment> SearchByDate(DateTime day)
+        public IList<Payment> SearchByDate(DateTime day, DateTime expire)
         {
-            var get = _context.Payments.Include(d=>d.Motor).Where(c => c.DayOfPayment == day).ToList();
+            var get = _context.Payments.Include(d=>d.Motor).Where(c => c.DayOfPayment <= day && c.Expire >= expire).ToList();
             return get;
         }
     }

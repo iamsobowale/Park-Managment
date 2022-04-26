@@ -44,7 +44,7 @@ namespace ParkManagmentMVC.Controllers
            return View();
         }
 
-        public IActionResult Get(int get)
+        public IActionResult Get()
         {
             var id = HttpContext.Session.GetInt32("driver");
             if (id == null)
@@ -103,7 +103,6 @@ namespace ParkManagmentMVC.Controllers
             _driverService.Delete(id);
             return RedirectToAction("Index");
         }
-
         public IActionResult Login()
         {
             return View();
@@ -114,7 +113,7 @@ namespace ParkManagmentMVC.Controllers
            var login =  _driverService.Login(_driverRequest);
             if (login.Data==null)
             {
-                ViewBag.Messsage = "Invalid Email or Password";
+                ViewBag.LoginError = "Invalid FirstName or Password";
                 return View();
             }
             HttpContext.Session.SetInt32("driver", login.Data.Id);
@@ -126,6 +125,5 @@ namespace ParkManagmentMVC.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
-
     }
 }

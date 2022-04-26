@@ -39,7 +39,7 @@ namespace ParkManagmentMVC.Controllers
             var id = HttpContext.Session.GetInt32("driver");
             var user = _driver.Get(id.Value);
             _motorService.Create(_model, user.Data.Id);
-                ViewBag.CarCreated = "Car Successfully Created";
+            ViewBag.CarCreated = "Car Successfully Created";
             return View();
         }
 
@@ -99,6 +99,18 @@ namespace ParkManagmentMVC.Controllers
                 return View();
             }
             return View(get);
+        }
+
+        public IActionResult GetAllCarPayment(int id)
+        {
+            var getAllPayment = _motorService.GetAllCarPaymentOfADriver(id);
+            if (getAllPayment==null)
+            {
+                ViewBag.GetAll = "Payments not found";
+                return View();
+            }
+
+            return View(getAllPayment);
         }
     }
 }

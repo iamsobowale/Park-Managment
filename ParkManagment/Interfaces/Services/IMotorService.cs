@@ -12,7 +12,8 @@ namespace ParkManagment.Interfaces
         MotorsResponseModel GetAll();
         MotorResponseModel Update(MotorRequestModel motor, int id);
         IList<Payment> GetPaymentByMotor (int id);
+        IList<Payment> GetAllCarPaymentOfADriver(int id);
 
-        
+
     }
 }

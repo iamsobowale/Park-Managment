@@ -10,6 +10,6 @@ namespace ParkManagment.Interfaces
         IList<Payment> CreateMultiple(IList<Payment> payment);
         Payment Get(int id);
         List<Payment> GetAll();
-        IList<Payment> SearchByDate(DateTime day);
+        IList<Payment> SearchByDate(DateTime day, DateTime expire);
     }
 }

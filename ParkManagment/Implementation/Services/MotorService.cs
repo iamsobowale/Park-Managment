@@ -115,5 +115,18 @@ namespace ParkManagment.Implementions.Service
         {
             return _Motors.GetPaymentByMotor(id);
         }
+
+        public IList<Payment> GetAllCarPaymentOfADriver(int id)
+        {
+            List<Payment> payments = new List<Payment>();
+            var getallcars = _driver.GetCarsByDriver(id);
+            foreach (var cars in getallcars)
+            {
+                var getAllPayment = _Motors.GetPaymentByMotor(cars.Id);
+                payments.AddRange(getAllPayment);
+            }
+
+            return payments;
+        }
     }
 }

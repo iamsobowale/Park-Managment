@@ -18,6 +18,7 @@
       <td>@Model.ParkName</td>
       <th> <a asp-action="GetCarByDrivers" asp-route-id="@Model.Id" class="btn btn-primary">Cars</a></th>
       <th> <a asp-controller="Driver" asp-action="Update" class="btn btn-primary">Update</a></th>
+       <th> <a asp-controller="Motor" asp-action="GetAllCarPayment" asp-route-id="@Model.Id" class="btn btn-primary">View All Payments</a></th>
     </tr>
   </table>
 </div>

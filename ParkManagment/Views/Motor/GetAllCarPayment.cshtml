@@ -1,0 +1,30 @@
+@model System.Collections.Generic.IList<ParkManagment.Entities.Payment>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Day Of Payment</th>
+            <th>Expiry Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @item.Id
+                </th>
+                <th>
+                    @item.DayOfPayment
+                </th>
+                <th>
+                    @item.Expire
+                </th>
+            </tr>
+        }
+        </tbody>
+        <tr>
+        </tr>
+    </table>
+</div>

@@ -1,36 +1,39 @@
-@model IEnumerable<ParkManagment.DTOs.Payment.PaymentDto>
-
+@model System.Collections.Generic.IList<ParkManagment.DTOs.Payment.PaymentDto>
 <div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Day Of Payment
-            </th>
-            <th>
-                Detail
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var payment in Model)
-        {
+<form asp-action="Index" method="get">
+    <p>
+        Start Date: <input type="date" name="searchStartDate" >
+        End Date: <input type="date" name="searchEndDate" >
+        <input type="submit" value="Filter"/>
+    </p>
+</form>
+<table class="table">
+            <thead>
             <tr>
-                <th>
-                    @payment.Id
-                </th>
-                <th>
-                    @payment.DayOfPayment
-                </th>
-                <th>
-                    <a asp-action="Get" asp-route-id="@payment.Id">View</a>
-                </th>
+                <th>Id</th>
+                <th>Day Of Payment</th>
+                <th>Number Of Days</th>
+                <th>Expire</th>
+                <th>Total Payment</th>
+                 <th>Car Reg</th>
             </tr>
-        }
-        </tbody>
-
-    </table>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@item.Id</th>
+                    <th>@item.DayOfPayment</th>
+                    <th>@item.NumberOfDays</th>
+                    <th>@item.Expire</th>
+                    <th>@item.TotalPayment</th>
+                    <th>@item.MotorRegNumber</th>
+                </tr>
+            }
+            </tbody>
+            <tr>
+            </tr>
+        </table>
 </div>
+
+
